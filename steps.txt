@@ -1,0 +1,12 @@
+1. install discord.py from discord.py  and copy basic concept code
+2.  go to discord.com and create a server
+
+3.   go to discord development portal to create a discord bot for that particular server
+      create an app and copy public key and application id
+
+4. go to bot and reset token copy token on all privileged gateways store the token in .env file
+    click all text permissions to bot
+
+5.in oath2 click bot then in down view channels and read messages we will get a generated url authorize it 
+
+6.python-dotenv install it and read the bot token from .env file
