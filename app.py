@@ -11,26 +11,32 @@ load_dotenv()
 token=os.getenv("MY_SECRET_KEY")
 
 API_KEY = os.getenv("GROQ_API_KEY")
+url = "https://api.groq.com/openai/v1/chat/completions"
+
+headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json"
+        }
+with open('chat.txt','r',encoding="utf-8") as f:
+    chat=f.read()
 
 class MyClient(discord.Client):
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
 
     async def on_message(self, message):
+        global chat
+        chat+=f"{message.author}: {message.content}\n"
         print(f'Message from {message.author}: {message.content}')
         if self.user!=message.author:
             if self.user in message.mentions:
+                print(chat)
                 channel=message.channel
-                url = "https://api.groq.com/openai/v1/chat/completions"
-
-                headers = {
-                "Authorization": f"Bearer {API_KEY}",
-                "Content-Type": "application/json"
-                    }
+                
                 payload = {
                     "model": "llama-3.3-70b-versatile",
                     "messages": [
-                    {"role": "user", "content": message.content}
+                    {"role": "user", "content": f"{chat}\nBotGPT: "}
                         ]
                         }
                 response = requests.post(url, json=payload, headers=headers)
