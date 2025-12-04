@@ -17,7 +17,20 @@ headers = {
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json"
         }
-with open('chat.txt','r',encoding="utf-8") as f:
+#file=input("Please Enter 1 ,2 or 3 to open respected files:")
+file="1"
+match(file):
+    case "1":
+        file="chat1.txt"
+    case "2":
+        file="chat2.txt"
+    case "3":
+        file="chat3.txt"
+    case _:
+        print('Invalid Choice')
+        exit()
+
+with open(file,'r',encoding="utf-8") as f:
     chat=f.read()
 
 class MyClient(discord.Client):
