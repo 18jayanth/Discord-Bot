@@ -6,7 +6,7 @@ import requests
 
 from dotenv import load_dotenv
 import os
-from openai import OpenAI
+
 load_dotenv()  
 token=os.getenv("MY_SECRET_KEY")
 
